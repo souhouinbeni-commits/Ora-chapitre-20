@@ -3,396 +3,668 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#100b18">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100817">
 <title>ORA — Chapitre 20</title>
+
 <style>
 :root {
-  --bg: #100b18;
-  --panel: #1b1425;
+  --bg: #100817;
+  --pink: #f2a6d8;
   --purple: #b99bff;
-  --cream: #f6eddf;
-  --muted: #b7aabd;
-  --line: #3b2c4b;
+  --white: #fff7fc;
+  --muted: #c8b9cc;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--cream);
-  font-family: Georgia, "Times New Roman", serif;
   min-height: 100vh;
+  color: var(--white);
+  background: var(--bg);
+  font-family: Georgia, "Times New Roman", serif;
+  overflow-x: hidden;
 }
 button { font: inherit; cursor: pointer; }
-button:focus-visible {
-  outline: 2px solid var(--purple);
-  outline-offset: 4px;
+button:focus-visible { outline: 2px solid white; outline-offset: 4px; }
+
+#ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 15% 15%, #52205c 0, transparent 40%),
+    radial-gradient(ellipse at 85% 80%, #29205c 0, transparent 42%),
+    #100817;
+  transition: background 1s;
 }
-.screen {
+.glow {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: #d65bbf;
+  filter: blur(100px);
+  opacity: .19;
+  animation: floatGlow 12s ease-in-out infinite alternate;
+}
+.glow:nth-child(2) {
+  width: 330px;
+  height: 330px;
+  background: #7958ff;
+  right: -100px;
+  bottom: -100px;
+  animation-delay: -5s;
+}
+.glow:nth-child(3) {
+  width: 170px;
+  height: 170px;
+  background: #ff9ccf;
+  top: 50%;
+  left: 40%;
+  animation-delay: -8s;
+}
+@keyframes floatGlow {
+  from { transform: translate(-25px,-20px) scale(.8); }
+  to { transform: translate(70px,50px) scale(1.25); }
+}
+
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  bottom: -30px;
+  color: var(--pink);
+  opacity: 0;
+  animation: rise linear forwards;
+}
+@keyframes rise {
+  10% { opacity: .65; }
+  85% { opacity: .45; }
+  100% { transform: translateY(-110vh) rotate(280deg); opacity: 0; }
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: linear-gradient(#100817dd, transparent);
+  pointer-events: none;
+}
+.brand {
+  font: 11px Arial, sans-serif;
+  letter-spacing: .2em;
+  color: var(--pink);
+}
+.music {
+  pointer-events: auto;
+  border: 1px solid #ffffff35;
+  color: white;
+  background: #ffffff0d;
+  border-radius: 50px;
+  padding: 10px 13px;
+  font: 11px Arial, sans-serif;
+}
+.music:hover { background: #ffffff20; }
+
+#progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  z-index: 20;
+  background: linear-gradient(90deg, var(--pink), var(--purple));
+  transition: width .5s;
+}
+
+.page {
   display: none;
-  min-height: 100vh;
-  padding: 28px 18px;
+  min-height: 100svh;
+  padding: 100px 20px 50px;
   align-items: center;
   justify-content: center;
-  position: relative;
-  z-index: 1;
 }
-.screen.active { display: flex; }
-.wrap { width: min(760px, 100%); margin: auto; }
-.eyebrow {
+.page.active { display: flex; animation: pageIn .65s ease both; }
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(18px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.content { width: min(700px, 100%); margin: auto; }
+.center { text-align: center; }
+.kicker {
+  color: var(--pink);
+  font: 10px/1.8 Arial, sans-serif;
+  letter-spacing: .27em;
   text-transform: uppercase;
-  letter-spacing: .24em;
-  color: var(--purple);
-  font: 11px/1.5 Arial, sans-serif;
 }
-h1, h2, h3, p { margin-top: 0; }
 h1 {
-  font-size: clamp(2.5rem, 9vw, 5.8rem);
-  line-height: .98;
+  font-size: clamp(3.6rem, 14vw, 7rem);
+  line-height: .9;
   font-weight: 400;
-  letter-spacing: -.045em;
-  margin: 18px 0;
+  letter-spacing: -.07em;
+  margin: 24px 0;
 }
 h2 {
-  font-size: clamp(1.8rem, 6vw, 3.2rem);
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  line-height: 1.02;
   font-weight: 400;
-  line-height: 1.08;
+  letter-spacing: -.045em;
+  margin: 15px 0;
 }
-p { line-height: 1.8; color: var(--muted); font-size: 1rem; }
-.rule { height: 1px; background: var(--line); margin: 26px 0; }
-.primary, .secondary {
-  border: 1px solid var(--purple);
-  padding: 14px 20px;
-  background: var(--purple);
-  color: #160f20;
-  letter-spacing: .07em;
-  text-transform: uppercase;
+h3 { font-size: 1.3rem; font-weight: 400; }
+p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.85;
+}
+.gradient-text {
+  background: linear-gradient(110deg, #fff, var(--pink), var(--purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.divider {
+  height: 1px;
+  width: 75px;
+  margin: 25px auto;
+  background: linear-gradient(90deg, transparent, var(--pink), transparent);
+}
+.btn {
+  position: relative;
+  border: 1px solid #f2a6d880;
+  border-radius: 50px;
+  padding: 15px 23px;
+  background: linear-gradient(120deg, #f2a6d8, #b99bff);
+  color: #210e28;
   font: 700 11px Arial, sans-serif;
-  transition: transform .2s, background .2s;
-}
-.primary:hover { transform: translateY(-2px); background: #d4c2ff; }
-.secondary { background: transparent; color: var(--cream); border-color: var(--line); }
-button:disabled { opacity: .55; cursor: wait; }
-.small { font: 11px/1.7 Arial, sans-serif; letter-spacing: .08em; color: var(--muted); }
-.center { text-align: center; }
-.card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  padding: clamp(20px, 5vw, 36px);
-  margin: 18px 0;
-}
-.tag {
-  display: inline-block;
-  border: 1px solid var(--line);
-  padding: 6px 9px;
-  color: var(--purple);
-  font: 10px Arial, sans-serif;
-  letter-spacing: .12em;
+  letter-spacing: .1em;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  box-shadow: 0 0 30px #d879c522;
+  transition: transform .25s, box-shadow .25s, background .25s;
 }
-.big-number {
-  font-size: clamp(5rem, 22vw, 10rem);
-  line-height: 1;
-  margin: 22px 0;
-  color: var(--purple);
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 35px #d879c555;
 }
-.grid, .media-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.btn-outline {
+  background: #ffffff08;
+  color: white;
+  border-color: #ffffff35;
+  box-shadow: none;
+}
+.btn-outline:hover { background: #ffffff15; }
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: 12px;
+  margin-top: 28px;
 }
-.media { border: 1px solid var(--line); background: #0b0810; padding: 8px; }
-.media img, .media video {
+.note {
+  font: 10px/1.8 Arial, sans-serif;
+  letter-spacing: .14em;
+  color: #a997b4;
+  text-transform: uppercase;
+}
+.glass {
+  padding: clamp(22px, 6vw, 38px);
+  border: 1px solid #ffffff19;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #ffffff0c, #ffffff04);
+  box-shadow: 0 20px 70px #00000020;
+  backdrop-filter: blur(12px);
+  margin: 20px 0;
+}
+.symbol {
+  font-size: 48px;
+  display: inline-block;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  12% { transform: scale(1.13); }
+  24% { transform: scale(1); }
+  36% { transform: scale(1.08); }
+}
+.count {
+  font-size: clamp(7rem, 30vw, 13rem);
+  line-height: 1;
+  margin: 25px 0;
+  text-shadow: 0 0 55px #f2a6d866;
+}
+.count.pop { animation: countPop .7s ease; }
+@keyframes countPop {
+  0% { opacity: 0; transform: scale(.3) rotate(-12deg); }
+  65% { opacity: 1; transform: scale(1.13) rotate(3deg); }
+  100% { transform: scale(1); }
+}
+.stamp {
+  display: inline-block;
+  padding: 7px 12px;
+  border: 1px solid #f2a6d855;
+  border-radius: 30px;
+  color: var(--pink);
+  font: 10px Arial, sans-serif;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.case {
+  border-left: 2px solid var(--pink);
+  padding: 4px 0 4px 18px;
+  margin: 23px 0;
+}
+.case b { color: var(--white); }
+.case p { margin-bottom: 0; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+.media-card {
+  border: 1px solid #ffffff20;
+  border-radius: 14px;
+  background: #ffffff08;
+  padding: 8px;
+  min-width: 0;
+  overflow: hidden;
+}
+.media-card img, .media-card video {
   display: block;
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
-  background: #21182d;
+  background: #21172b;
+  border-radius: 9px;
 }
-.media figcaption {
-  font: 11px/1.5 Arial, sans-serif;
+.media-card figcaption {
   color: var(--muted);
-  padding: 9px 3px 3px;
+  font: 10px/1.7 Arial, sans-serif;
+  letter-spacing: .06em;
+  padding: 10px 3px 3px;
 }
-textarea {
-  width: 100%;
-  min-height: 110px;
-  background: #100b18;
-  color: var(--cream);
-  border: 1px solid var(--line);
-  padding: 14px;
-  font: 15px/1.6 Georgia, serif;
-  resize: vertical;
+.media-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.hidden { display: none !important; }
+.final-text {
+  font-size: 16px;
+  line-height: 2;
+  color: #e7dce9;
 }
-.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-.actions button { flex: 1; min-width: 130px; }
-#status {
-  min-height: 1.5em;
-  color: var(--purple);
-  font: 12px/1.6 Arial, sans-serif;
-  margin-top: 12px;
-}
+#noBtn { transition: transform .2s; }
+#yesBtn { transform-origin: center; }
 footer {
-  font: 10px Arial, sans-serif;
-  color: #81748b;
-  letter-spacing: .12em;
   text-align: center;
-  padding: 24px;
+  padding: 20px 0;
+  color: #8f7c99;
+  font: 9px Arial, sans-serif;
+  letter-spacing: .18em;
 }
-.letter { white-space: pre-line; }
-@media (max-width: 520px) {
-  .grid, .media-grid { grid-template-columns: 1fr; }
-  .screen { padding: 24px 16px; }
-  .actions { flex-direction: column; }
-  .actions button { width: 100%; }
+@media(max-width:500px) {
+  .page { padding: 90px 17px 35px; }
+  .gallery { gap: 8px; }
+  .media-card { padding: 6px; }
+  .btn { padding: 14px 18px; }
+  .topbar { padding: 13px 15px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { transition: none !important; animation: none !important; }
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }
 </style>
 </head>
+
 <body>
-<main>
+<div id="ambient">
+  <div class="glow"></div>
+  <div class="glow"></div>
+  <div class="glow"></div>
+</div>
+<div id="particles"></div>
+<div id="progress"></div>
 
-<section id="welcome" class="screen active">
-  <div class="wrap center">
-    <div class="eyebrow">Un cadeau rien que pour toi</div>
-    <h1>ORA<br><span style="color:var(--purple)">Chapitre 20</span></h1>
-    <p>Cinq ans d’amitié, des souvenirs, des fous rires… et encore plein de chapitres à écrire.</p>
-    <div class="rule"></div>
-    <button id="openGift" class="primary" type="button">OUVRE TON CADEAU →</button>
-    <p class="small" style="margin-top:18px">03 MARS · ÉDITION SPÉCIALE</p>
-    <p id="welcomeStatus" class="small" aria-live="polite"></p>
+<header class="topbar">
+  <div class="brand">ORA · CHAPITRE 20</div>
+  <button id="musicBtn" class="music" type="button">♫ MUSIQUE</button>
+</header>
+
+<audio id="music" src="musique.mp3" loop preload="none"></audio>
+
+<!-- PAGE 1 : OUVERTURE -->
+<section id="p1" class="page active">
+  <div class="content center">
+    <div class="kicker">Une surprise t’attend</div>
+    <div class="symbol" style="margin-top:35px">✦</div>
+    <h1>ORA<br><span class="gradient-text">20 ans.</span></h1>
+    <div class="divider"></div>
+    <p>Cinq ans d’amitié.<br>Des souvenirs, des délires… et un cadeau rien que pour toi.</p>
+    <div class="buttons">
+      <button class="btn" type="button" onclick="goTo('p2')">OUVRE TON CADEAU ↗</button>
+    </div>
+    <p class="note" style="margin-top:32px">03 MARS · ÉDITION SPÉCIALE</p>
   </div>
 </section>
 
-<section id="countdown" class="screen">
-  <div class="wrap center">
-    <div class="eyebrow">Prépare-toi, Ora</div>
-    <div id="countNumber" class="big-number" aria-live="polite">3</div>
-    <p>Le chapitre spécial commence maintenant.</p>
+<!-- PAGE 2 : COMPTE À REBOURS -->
+<section id="p2" class="page">
+  <div class="content center">
+    <div class="kicker">Attends un peu, Ora…</div>
+    <h2>Ton nouveau chapitre<br><span class="gradient-text">commence dans</span></h2>
+    <div id="count" class="count">3</div>
+    <p>Prête pour la suite ?</p>
+    <button id="skipCount" class="btn btn-outline" type="button">JE SUIS PRÊTE →</button>
   </div>
 </section>
 
-<section id="birthday" class="screen">
-  <div class="wrap">
-    <div class="eyebrow">03 mars · Joyeux anniversaire</div>
-    <h1>Bienvenue dans<br><span style="color:var(--purple)">ton chapitre 20.</span></h1>
-    <p>Aujourd’hui, c’est toi la star. Profite de chaque ligne, madame la célébrité.</p>
-    <div class="rule"></div>
-
-    <div class="card">
-      <span class="tag">Dossier confidentiel</span>
-      <h2>Quelques vérités sur Ora</h2>
-      <p><strong style="color:var(--cream)">Pièce n° 01 — La taille :</strong> un sujet délicat, apparemment. On ne juge pas… on constate seulement.</p>
-      <p><strong style="color:var(--cream)">Pièce n° 02 — La cuisine :</strong> ton talent culinaire reste une affaire à suivre. Les témoins sont encore en train de digérer.</p>
-      <p><strong style="color:var(--cream)">Verdict :</strong> malgré tout ça, on te garde dans l’équipe. Pour toujours, même.</p>
+<!-- PAGE 3 : ANNIVERSAIRE -->
+<section id="p3" class="page">
+  <div class="content center">
+    <div class="symbol">🎂</div>
+    <div class="kicker">03 mars · jour spécial</div>
+    <h1 class="gradient-text">Joyeux<br>anniversaire !</h1>
+    <p>20 ans, Ora ! Un nouveau chapitre, de nouvelles aventures et encore plus de raisons de sourire.</p>
+    <div class="glass">
+      <h3>Ce site est officiellement dédié à…</h3>
+      <p style="font-size:21px;color:var(--white)">Madame Ora elle-même ✨</p>
+      <p>Et oui, tu as droit à un cadeau. Ne prends pas trop la grosse tête quand même.</p>
     </div>
-
-    <div class="card">
-      <span class="tag">Les archives</span>
-      <h2>Quelques souvenirs</h2>
-      <p>Ajoute tes trois photos dans le même dossier que index.html et garde les noms indiqués ci-dessous.</p>
-      <div class="media-grid">
-        <figure class="media">
-          <img src="photo1.jpg" alt="Souvenir photo 1" loading="lazy">
-          <figcaption>Souvenir n° 01</figcaption>
-        </figure>
-        <figure class="media">
-          <img src="photo2.jpg" alt="Souvenir photo 2" loading="lazy">
-          <figcaption>Souvenir n° 02</figcaption>
-        </figure>
-        <figure class="media">
-          <img src="photo3.jpg" alt="Souvenir photo 3" loading="lazy">
-          <figcaption>Souvenir n° 03</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="card">
-      <span class="tag">Les vidéos</span>
-      <h2>Les preuves en images</h2>
-      <p>Ajoute video1.mp4, video2.mp4 et video3.mp4 dans le même dossier que ce fichier.</p>
-      <div class="media-grid">
-        <figure class="media">
-          <video controls preload="metadata"><source src="video1.mp4" type="video/mp4">Ton navigateur ne peut pas lire cette vidéo.</video>
-          <figcaption>Vidéo n° 01</figcaption>
-        </figure>
-        <figure class="media">
-          <video controls preload="metadata"><source src="video2.mp4" type="video/mp4">Ton navigateur ne peut pas lire cette vidéo.</video>
-          <figcaption>Vidéo n° 02</figcaption>
-        </figure>
-        <figure class="media">
-          <video controls preload="metadata"><source src="video3.mp4" type="video/mp4">Ton navigateur ne peut pas lire cette vidéo.</video>
-          <figcaption>Vidéo n° 03</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="card">
-      <span class="tag">Un mot pour toi</span>
-      <h2>Au-delà des blagues…</h2>
-      <p class="letter">Ora, cinq ans d’amitié, ce n’est pas rien. On a accumulé des souvenirs, des délires et des moments qui comptent vraiment. Je te souhaite une nouvelle année remplie de paix, de santé, de belles surprises et de projets qui avancent. Garde cette lumière qui fait de toi une personne à part. Même si je te taquine, sache que tu comptes énormément pour moi. Merci pour ces cinq années d’amitié. Et que le meilleur reste à venir. ❤️</p>
-    </div>
-
-    <div class="card">
-      <span class="tag">Question officielle</span>
-      <h2>Alors, tu as aimé ton cadeau ?</h2>
-      <p>Réponds franchement… je peux encaisser. Enfin, je crois.</p>
-      <div class="actions">
-        <button id="yesButton" class="primary" type="button">OUI, J’AI AIMÉ ❤️</button>
-        <button id="noButton" class="secondary" type="button">NON 😭</button>
-      </div>
-      <p id="answerStatus" aria-live="polite"></p>
-    </div>
-
-    <div id="finalLetter" class="card" hidden>
-      <span class="tag">Dernière page</span>
-      <h2>À notre amitié.</h2>
-      <p class="letter">Joyeux 20 ans, Ora. Peu importe les années qui passent, je te souhaite sincèrement le bonheur, la réussite et des personnes qui t’aiment bien autour de toi. Merci d’être entrée dans ma vie et d’y être restée. Ce chapitre se termine ici, mais notre histoire d’amitié continue. ❤️</p>
-      <p class="small">FIN DU CHAPITRE 20 · PAS DE L’AMITIÉ</p>
-    </div>
-
-    <div class="center">
-      <button id="musicButton" class="secondary" type="button" aria-pressed="false">♫ Activer la musique</button>
-      <p class="small">Pour la musique, ajoute un fichier nommé musique.mp3 dans le même dossier.</p>
-      <audio id="backgroundMusic" src="musique.mp3" loop preload="none"></audio>
-    </div>
-    <footer>ORA — CHAPITRE 20 · AVEC AFFECTION</footer>
+    <button class="btn" type="button" onclick="goTo('p4')">CONTINUER L’AVENTURE →</button>
   </div>
 </section>
-</main>
 
-<noscript>
-  <p style="padding:20px;color:#f6eddf;background:#1b1425;text-align:center">
-    Active JavaScript dans ton navigateur pour ouvrir le cadeau.
-  </p>
-</noscript>
+<!-- PAGE 4 : DOSSIER -->
+<section id="p4" class="page">
+  <div class="content">
+    <div class="kicker">Archives confidentielles · accès autorisé</div>
+    <h2>Le dossier<br><span class="gradient-text">ORA.</span></h2>
+    <p>Après cinq ans d’amitié, il fallait bien que certaines informations sortent au grand jour.</p>
+    <div class="glass">
+      <div class="case">
+        <span class="stamp">Pièce n° 01</span>
+        <h3>La taille 📏</h3>
+        <p><b>Affaire sensible.</b> Les données sont confidentielles… mais on a quand même remarqué quelques détails. 😭</p>
+      </div>
+      <div class="case">
+        <span class="stamp">Pièce n° 02</span>
+        <h3>La cuisine 🍳</h3>
+        <p><b>Enquête en cours.</b> Certains plats sont des expériences scientifiques. Les témoins demandent encore des explications.</p>
+      </div>
+      <div class="case">
+        <span class="stamp">Verdict</span>
+        <h3>Mais on te garde ❤️</h3>
+        <p>Malgré les preuves accablantes, tu restes une personne importante. Le jury est formel : amitié à perpétuité.</p>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="btn btn-outline" type="button" onclick="goTo('p3')">← RETOUR</button>
+      <button class="btn" type="button" onclick="goTo('p5')">VOIR LES SOUVENIRS →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5 : PHOTOS -->
+<section id="p5" class="page">
+  <div class="content">
+    <div class="kicker">Cinq ans d’amitié · les archives</div>
+    <h2>Nos petits<br><span class="gradient-text">souvenirs.</span></h2>
+    <p>Quelques images valent parfois mille mots. Voici les places réservées à nos souvenirs.</p>
+    <div class="gallery">
+      <figure class="media-card">
+        <img src="photo1.jpg" alt="Souvenir numéro 1" loading="lazy">
+        <figcaption>SOUVENIR · 01</figcaption>
+      </figure>
+      <figure class="media-card">
+        <img src="photo2.jpg" alt="Souvenir numéro 2" loading="lazy">
+        <figcaption>SOUVENIR · 02</figcaption>
+      </figure>
+      <figure class="media-card">
+        <img src="photo3.jpg" alt="Souvenir numéro 3" loading="lazy">
+        <figcaption>SOUVENIR · 03</figcaption>
+      </figure>
+    </div>
+    <p class="note">Remplace photo1.jpg, photo2.jpg et photo3.jpg par tes photos.</p>
+    <div class="buttons">
+      <button class="btn btn-outline" type="button" onclick="goTo('p4')">← RETOUR</button>
+      <button class="btn" type="button" onclick="goTo('p6')">ET LES VIDÉOS ? →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6 : VIDÉOS -->
+<section id="p6" class="page">
+  <div class="content">
+    <div class="kicker">Les preuves sont là</div>
+    <h2>Les moments<br><span class="gradient-text">en mouvement.</span></h2>
+    <p>Parce qu’une photo, c’est bien. Mais les vidéos, c’est encore mieux.</p>
+    <div class="gallery">
+      <figure class="media-card">
+        <video controls preload="metadata"><source src="video1.mp4" type="video/mp4"></video>
+        <figcaption>ARCHIVE VIDÉO · 01</figcaption>
+      </figure>
+      <figure class="media-card">
+        <video controls preload="metadata"><source src="video2.mp4" type="video/mp4"></video>
+        <figcaption>ARCHIVE VIDÉO · 02</figcaption>
+      </figure>
+      <figure class="media-card">
+        <video controls preload="metadata"><source src="video3.mp4" type="video/mp4"></video>
+        <figcaption>ARCHIVE VIDÉO · 03</figcaption>
+      </figure>
+    </div>
+    <p class="note">Ajoute video1.mp4, video2.mp4 et video3.mp4 dans le dépôt.</p>
+    <div class="buttons">
+      <button class="btn btn-outline" type="button" onclick="goTo('p5')">← RETOUR</button>
+      <button class="btn" type="button" onclick="goTo('p7')">UN MOT POUR TOI →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 7 : MESSAGE -->
+<section id="p7" class="page">
+  <div class="content center">
+    <div class="symbol">♡</div>
+    <div class="kicker">Un instant sans blague</div>
+    <h2>Cette fois,<br><span class="gradient-text">je suis sérieux.</span></h2>
+    <div class="glass">
+      <p class="final-text">Ora, cinq ans d’amitié, ce n’est pas rien. On a accumulé des souvenirs, des délires et des moments qui comptent vraiment.</p>
+      <p class="final-text">Je te souhaite une nouvelle année remplie de paix, de santé, de belles surprises et de projets qui avancent.</p>
+      <p class="final-text">Garde cette lumière qui fait de toi une personne à part. Même si je te taquine, sache que tu comptes énormément pour moi.</p>
+      <p class="final-text">Merci pour ces cinq années d’amitié. Et que le meilleur reste à venir. ❤️</p>
+    </div>
+    <button class="btn" type="button" onclick="goTo('p8')">J’AI UNE QUESTION POUR TOI →</button>
+  </div>
+</section>
+
+<!-- PAGE 8 : OUI / NON -->
+<section id="p8" class="page">
+  <div class="content center">
+    <div class="kicker">Question officielle</div>
+    <div class="symbol">💌</div>
+    <h2>Alors, Ora…<br><span class="gradient-text">tu as aimé ?</span></h2>
+    <p>Réfléchis bien avant de répondre. Ta réponse sera enregistrée dans l’histoire de notre amitié. 😭</p>
+    <div class="buttons" style="min-height:100px">
+      <button id="yesBtn" class="btn" type="button">OUI ❤️</button>
+      <button id="noBtn" class="btn btn-outline" type="button">NON 😭</button>
+    </div>
+    <p id="answer" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- PAGE 9 : FIN -->
+<section id="p9" class="page">
+  <div class="content center">
+    <div class="symbol">💗</div>
+    <div class="kicker">Dernière page · pour Ora</div>
+    <h1 class="gradient-text">À notre<br>amitié.</h1>
+    <div class="divider"></div>
+    <div class="glass">
+      <p class="final-text">Joyeux 20 ans, Ora.</p>
+      <p class="final-text">Peu importe les années qui passent, je te souhaite sincèrement le bonheur, la réussite et des personnes qui t’aiment bien autour de toi.</p>
+      <p class="final-text">Merci d’être entrée dans ma vie et d’y être restée. Ce chapitre se termine ici, mais notre histoire d’amitié continue.</p>
+      <p style="font-size:25px;color:var(--pink)">Toujours dans l’équipe. ❤️</p>
+    </div>
+    <p class="note">ORA — CHAPITRE 20 · FIN DU SITE, PAS DE L’AMITIÉ</p>
+    <button class="btn btn-outline" type="button" onclick="goTo('p1')">↻ REVIVRE L’EXPÉRIENCE</button>
+  </div>
+</section>
 
 <script>
 (() => {
-  "use strict";
+  const $ = id => document.getElementById(id);
+  const pages = Array.from(document.querySelectorAll(".page"));
+  let currentPage = "p1";
+  let countStarted = false;
+  let yesScale = 1;
+  let noClicks = 0;
 
-  const $ = (id) => document.getElementById(id);
-  let countdownRunning = false;
-  let musicOn = false;
+  // Navigation entre les pages de l'expérience.
+  window.goTo = function(id) {
+    const next = $(id);
+    if (!next) return;
 
-  function showSection(id) {
-    document.querySelectorAll(".screen").forEach((section) => {
-      section.classList.toggle("active", section.id === id);
-    });
+    pages.forEach(page => page.classList.remove("active"));
+    next.classList.add("active");
+    currentPage = id;
+
+    const number = Number(id.slice(1));
+    $("progress").style.width = ((number - 1) / 8 * 100) + "%";
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }
 
-  async function startExperience() {
-    if (countdownRunning) return;
+    if (id === "p2" && !countStarted) startCountdown();
+  };
 
-    countdownRunning = true;
-    $("openGift").disabled = true;
-    $("welcomeStatus").textContent = "Le cadeau s’ouvre…";
+  // Compte à rebours animé.
+  async function startCountdown() {
+    if (countStarted) return;
+    countStarted = true;
 
-    showSection("countdown");
+    const number = $("count");
+    const skip = $("skipCount");
+    const values = ["3", "2", "1", "✦"];
 
-    const number = $("countNumber");
-
-    for (const value of ["3", "2", "1", "✦"]) {
+    for (const value of values) {
+      if (currentPage !== "p2") return;
       number.textContent = value;
-      await new Promise((resolve) => window.setTimeout(resolve, 750));
+      number.classList.remove("pop");
+      void number.offsetWidth;
+      number.classList.add("pop");
+
+      await new Promise(resolve => setTimeout(resolve, 850));
     }
 
-    showSection("birthday");
-    countdownRunning = false;
+    if (currentPage === "p2") {
+      await new Promise(resolve => setTimeout(resolve, 400));
+      goTo("p3");
+    }
   }
 
-  async function toggleMusic() {
-    const audio = $("backgroundMusic");
-    const button = $("musicButton");
+  $("skipCount").addEventListener("click", () => goTo("p3"));
 
-    if (!musicOn) {
+  // Bouton OUI qui grossit à chaque clic.
+  $("yesBtn").addEventListener("click", () => {
+    goTo("p9");
+    burstHearts();
+  });
+
+  $("yesBtn").addEventListener("pointerdown", () => {
+    yesScale = Math.min(yesScale + 0.12, 1.7);
+    $("yesBtn").style.transform = `scale(${yesScale})`;
+  });
+
+  // Bouton NON qui esquive doucement les clics, puis devient OUI.
+  $("noBtn").addEventListener("click", () => {
+    noClicks++;
+
+    if (noClicks < 3) {
+      const x = (Math.random() * 90) - 45;
+      const y = (Math.random() * 30) - 15;
+      $("noBtn").style.transform = `translate(${x}px, ${y}px)`;
+      $("answer").textContent = [
+        "Tu es sûre ? 🥹",
+        "Oraaaa réfléchis encore 😭"
+      ][noClicks - 1];
+    } else {
+      $("noBtn").textContent = "BON… OUI ❤️";
+      $("noBtn").classList.remove("btn-outline");
+      $("noBtn").style.transform = "none";
+      $("answer").textContent = "Je savais que tu finirais par dire oui 😂";
+      $("noBtn").onclick = () => {
+        goTo("p9");
+        burstHearts();
+      };
+    }
+  });
+
+  // Musique : nécessite musique.mp3 à côté de index.html.
+  const audio = $("music");
+  const musicBtn = $("musicBtn");
+
+  musicBtn.addEventListener("click", async () => {
+    if (audio.paused) {
       try {
         await audio.play();
-        musicOn = true;
-        button.textContent = "Ⅱ Couper la musique";
-        button.setAttribute("aria-pressed", "true");
+        musicBtn.textContent = "Ⅱ MUSIQUE";
       } catch (error) {
-        button.textContent = "Musique indisponible — vérifie musique.mp3";
-        $("answerStatus").textContent =
-          "La page fonctionne, mais le fichier musique.mp3 est introuvable ou illisible.";
+        musicBtn.textContent = "♫ FICHIER À VÉRIFIER";
       }
     } else {
       audio.pause();
-      musicOn = false;
-      button.textContent = "♫ Activer la musique";
-      button.setAttribute("aria-pressed", "false");
-    }
-  }
-
-  function chooseAnswer(answer) {
-    const status = $("answerStatus");
-
-    if (answer === "yes") {
-      status.textContent =
-        "Je le savais 😭❤️ Va voir la dernière page, elle est pour toi.";
-
-      $("finalLetter").hidden = false;
-      $("finalLetter").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
-      $("yesButton").textContent = "OUIIIII ❤️";
-      $("yesButton").style.transform = "scale(1.03)";
-    } else {
-      status.textContent =
-        "Même pas un petit peu ? 😭 Réfléchis encore, Ora…";
-
-      const button = $("noButton");
-      button.textContent = "BON… OUI 😭";
-      button.classList.remove("secondary");
-      button.classList.add("primary");
-
-      // Le deuxième clic sur NON devient OUI.
-      button.onclick = () => chooseAnswer("yes");
-    }
-  }
-
-  function initialisePage() {
-    const openButton = $("openGift");
-    const musicButton = $("musicButton");
-    const yesButton = $("yesButton");
-    const noButton = $("noButton");
-
-    if (!openButton || !musicButton || !yesButton || !noButton) {
-      console.error("ORA — Chapitre 20 : un bouton attendu est absent du HTML.");
-      return;
-    }
-
-    openButton.addEventListener("click", startExperience);
-    musicButton.addEventListener("click", toggleMusic);
-    yesButton.addEventListener("click", () => chooseAnswer("yes"));
-    noButton.addEventListener("click", () => chooseAnswer("no"));
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initialisePage, {
-      once: true
-    });
-  } else {
-    initialisePage();
-  }
-
-  window.addEventListener("error", () => {
-    const status = $("answerStatus") || $("welcomeStatus");
-
-    if (status) {
-      status.textContent =
-        "Un problème JavaScript est survenu. Vérifie que tout le code de index.html a été copié.";
+      musicBtn.textContent = "♫ MUSIQUE";
     }
   });
+
+  // Particules flottantes en arrière-plan.
+  const particles = $("particles");
+  const symbols = ["✦", "✧", "♡", "·", "✺"];
+
+  function makeParticle() {
+    const particle = document.createElement("span");
+    particle.className = "particle";
+    particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.fontSize = (10 + Math.random() * 17) + "px";
+    particle.style.animationDuration = (7 + Math.random() * 8) + "s";
+    particles.appendChild(particle);
+    setTimeout(() => particle.remove(), 16000);
+  }
+
+  for (let i = 0; i < 18; i++) {
+    setTimeout(makeParticle, i * 250);
+  }
+  setInterval(makeParticle, 650);
+
+  // Petit bouquet de cœurs à la fin.
+  function burstHearts() {
+    for (let i = 0; i < 24; i++) {
+      setTimeout(() => {
+        const heart = document.createElement("span");
+        heart.className = "particle";
+        heart.textContent = ["♡", "♥", "✦"][Math.floor(Math.random() * 3)];
+        heart.style.left = (20 + Math.random() * 60) + "%";
+        heart.style.fontSize = (16 + Math.random() * 24) + "px";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        particles.appendChild(heart);
+        setTimeout(() => heart.remove(), 7000);
+      }, i * 70);
+    }
+  }
 })();
 </script>
+
 </body>
 </html>
