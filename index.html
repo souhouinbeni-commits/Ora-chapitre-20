@@ -1,1 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100d16">
+  <title>ORA — CHAPITRE 20</title>
 
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #100d16;
+      --panel: #191420;
+      --purple: #a78bfa;
+      --cream: #f4eee6;
+      --muted: #aaa1b5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 50% 0%, #30203e 0%, transparent 48%),
+        var(--bg);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .4;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, white 99%, transparent),
+        radial-gradient(1px 1px at 80% 30%, white 99%, transparent),
+        radial-gradient(1px 1px at 40% 70%, white 99%, transparent),
+        radial-gradient(1px 1px at 90% 85%, white 99%, transparent),
+        radial-gradient(1px 1px at 25% 90%, white 99%, transparent);
+      background-size: 250px 250px;
+      z-index: -1;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 35px 23px;
+    }
+
+    .label {
+      color: var(--purple);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(45px, 12vw, 78px);
+      line-height: 1.08;
+      font-weight: 500;
+      letter-spacing: -2px;
+    }
+
+    h1 span {
+      color: var(--purple);
+      font-style: italic;
+    }
+
+    .intro {
+      max-width: 340px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+      margin: 25px auto 32px;
+    }
+
+    .line {
+      width: 45px;
+      height: 1px;
+      background: var(--purple);
+      margin: 0 auto 25px;
+      opacity: .8;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      transition: transform .25s, background .25s;
+    }
+
+    button:active {
+      transform: scale(.96);
+    }
+
+    .primary {
+      color: #17111e;
+      background: var(--cream);
+      padding: 16px 25px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .primary:hover {
+      background: var(--purple);
+    }
+
+    .small {
+      color: #82788e;
+      font-size: 10px;
+      margin-top: 23px;
+      letter-spacing: 1px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(100px, 30vw, 160px);
+      color: var(--purple);
+      animation: appear .7s ease;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(15px) scale(.92); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    .heart {
+      font-size: 34px;
+      margin-bottom: 25px;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 440px;
+      padding: 30px 23px;
+      border: 1px solid #42334e;
+      background: #191420b8;
+      border-radius: 8px;
+      margin-top: 28px;
+    }
+
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 29px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .secondary {
+      color: var(--cream);
+      background: #292131;
+      border: 1px solid #493956;
+      padding: 15px 23px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 18px;
+      color: #73697d;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    #musicButton {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 5;
+      background: #251c30;
+      border: 1px solid #493956;
+      color: var(--cream);
+      padding: 10px 13px;
+      border-radius: 30px;
+      font-size: 11px;
+    }
+
+    .fade {
+      animation: appear .8s ease both;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars"></div>
+
+  <audio id="music" loop preload="auto">
+    <source src="musique.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicButton" class="hidden" onclick="toggleMusic()">
+    ♫ Musique
+  </button>
+
+  <main>
+    <section id="intro" class="page">
+      <div class="label">Une histoire qui mérite sa place</div>
+
+      <h1>ORA<br><span>Chapitre 20.</span></h1>
+
+      <div class="line" style="margin-top: 27px;"></div>
+
+      <p class="intro">
+        Cinq ans de souvenirs, de fous rires, de taquineries
+        et de moments qu'on n'oubliera pas.<br><br>
+        Mais aujourd'hui, ce n'est pas un jour comme les autres…
+      </p>
+
+      <button class="primary" onclick="startExperience()">
+        J'AI QUELQUE CHOSE POUR TOI →
+      </button>
+
+      <div class="small">03 MARS · UNE NOUVELLE PAGE</div>
+    </section>
+
+    <section id="countdown" class="page hidden">
+      <div class="label">Le moment est arrivé</div>
+      <div id="number" class="number">3</div>
+      <p class="intro">Prépare-toi, Oradine… 👀</p>
+    </section>
+
+    <section id="birthday" class="page hidden">
+      <div class="heart">✦</div>
+      <div class="label">Aujourd'hui, tout est pour toi</div>
+
+      <h1>Happy<br><span>Birthday, Ora.</span></h1>
+
+      <p class="intro">
+        20 ans, ça se fête.<br>
+        Et toi, tu mérites bien plus qu'un simple message.
+      </p>
+
+      <button class="primary" onclick="showDossier()">
+        CONTINUER L'AVENTURE →
+      </button>
+    </section>
+
+    <section id="dossier" class="page hidden">
+      <div class="label">Document confidentiel · Accès autorisé</div>
+
+      <h1>Le dossier<br><span>Oradine.</span></h1>
+
+      <div class="card fade">
+        <h2>Suspecte n° 01</h2>
+        <p>
+          Nom : Oradine<br>
+          Surnom : Ora<br>
+          Âge : 20 ans<br>
+          Ancienneté dans ma vie : 5 ans
+        </p>
+
+        <div class="line" style="margin-top: 25px;"></div>
+
+        <p>
+          <strong style="color: var(--cream);">
+            Chefs d'accusation :
+          </strong><br><br>
+          Être beaucoup trop courte 😂<br>
+          Me rendre accro à sa cuisine 😭<br>
+          Me taquiner sans jamais être fatiguée<br>
+          Et surtout… prendre une place énorme dans ma vie.
+        </p>
+      </div>
+
+      <p class="intro">
+        Et le pire ?<br>
+        Je ne compte même pas porter plainte. 😂❤️
+      </p>
+
+      <button class="primary" onclick="showMessage()">
+        BON, PLUS SÉRIEUSEMENT… →
+      </button>
+    </section>
+
+    <section id="message" class="page hidden">
+      <div class="label">Quelques mots pour toi</div>
+
+      <h1>Parce que<br><span>tu comptes.</span></h1>
+
+      <div class="card fade">
+        <p>
+          Cinq ans, ce n'est pas rien.
+          Avec le temps, tu es devenue une personne
+          qui compte énormément pour moi.<br><br>
+
+          Merci pour tes appels, tes messages,
+          ta façon de prendre de mes nouvelles quand
+          ça ne va pas, et pour toutes ces longues
+          conversations qui font du bien.<br><br>
+
+          Merci aussi pour tout ce que tu fais pour moi,
+          même les choses que tu considères peut-être
+          comme normales. Je les vois, je les apprécie,
+          et je ne veux jamais les prendre pour acquises.<br><br>
+
+          Aujourd'hui, c'est ton jour.
+          Alors j'espère que cette nouvelle année
+          t'apportera autant de bonheur que tu en donnes
+          aux personnes qui ont la chance de te connaître.
+        </p>
+      </div>
+
+      <button class="primary" style="margin-top: 28px;"
+        onclick="showTest()">
+        ATTENDS, J'AI UNE QUESTION 😂 →
+      </button>
+    </section>
+
+    <section id="test" class="page hidden">
+      <div class="label">Test officiel de notre amitié</div>
+
+      <h1>Tu m'aimes<br><span>bien, au moins ?</span></h1>
+
+      <p class="intro">
+        Attention, Ora. Réfléchis bien avant de répondre.
+        Ta réponse sera conservée dans les archives
+        très sérieuses de notre amitié. 😂
+      </p>
+
+      <div class="actions">
+        <button class="primary" onclick="showFinal()">
+          ÉVIDEMMENT ❤️
+        </button>
+
+        <button class="secondary" id="noButton" onclick="moveNo()">
+          NON 🙄
+        </button>
+      </div>
+    </section>
+
+    <section id="final" class="page hidden">
+      <div class="heart">♡</div>
+
+      <div class="label">À lire jusqu'au bout</div>
+
+      <h1>Ora,<br><span>merci d'exister.</span></h1>
+
+      <div class="card fade">
+        <p>
+          Si tu es arrivée jusqu'ici, je veux que tu saches
+          une chose : tu as une vraie place dans ma vie.<br><br>
+
+          Je ne peux pas te promettre que chaque jour
+          sera facile, ni que je trouverai toujours
+          les mots parfaits. Mais je veux que tu saches
+          que tu peux compter sur moi.<br><br>
+
+          Tu n'as pas besoin d'être forte tout le temps.
+          Tu as aussi le droit d'être fatiguée,
+          de ne pas aller bien, de parler ou de garder
+          le silence. Tu mérites qu'on prenne soin de toi
+          aussi, sans que tu aies toujours à faire semblant
+          que tout va bien.<br><br>
+
+          Merci pour ces cinq années, pour les souvenirs,
+          les rires, les petites attentions et tout ce
+          qu'on a partagé.<br><br>
+
+          Joyeux anniversaire, ma Ora.
+          Que tes 20 ans ouvrent la porte à de belles
+          choses, à la paix, à la joie et à des rêves
+          qui deviennent réalité.<br><br>
+
+          Peu importe la suite de la vie, je te souhaite
+          sincèrement le meilleur.<br><br>
+
+          <strong style="color: var(--cream);">
+            Je t'aime fort, ma meilleure amie. ❤️
+          </strong>
+        </p>
+      </div>
+
+      <p class="small">FIN DU CHAPITRE 20 · L'HISTOIRE CONTINUE…</p>
+    </section>
+  </main>
+
+  <script>
+    const sections = [
+      'intro', 'countdown', 'birthday',
+      'dossier', 'message', 'test', 'final'
+    ];
+
+    const music = document.getElementById('music');
+    const musicButton = document.getElementById('musicButton');
+    let musicPlaying = false;
+
+    function showSection(id) {
+      sections.forEach(section => {
+        document.getElementById(section).classList.add('hidden');
+      });
+
+      document.getElementById(id).classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function startExperience() {
+      musicButton.classList.remove('hidden');
+
+      try {
+        await music.play();
+        musicPlaying = true;
+        musicButton.textContent = '♫ Musique ON';
+      } catch (error) {
+        musicButton.textContent = '♫ Lancer la musique';
+      }
+
+      showSection('countdown');
+
+      let value = 3;
+      const number = document.getElementById('number');
+
+      const timer = setInterval(() => {
+        value--;
+
+        if (value > 0) {
+          number.textContent = value;
+          number.style.animation = 'none';
+          void number.offsetWidth;
+          number.style.animation = 'appear .7s ease';
+        } else {
+          clearInterval(timer);
+          showSection('birthday');
+        }
+      }, 1000);
+    }
+
+    async function toggleMusic() {
+      if (musicPlaying) {
+        music.pause();
+        musicPlaying = false;
+        musicButton.textContent = '♫ Musique OFF';
+      } else {
+        try {
+          await music.play();
+          musicPlaying = true;
+          musicButton.textContent = '♫ Musique ON';
+        } catch (error) {
+          musicButton.textContent = 'Musique indisponible';
+        }
+      }
+    }
+
+    function showDossier() {
+      showSection('dossier');
+    }
+
+    function showMessage() {
+      showSection('message');
+    }
+
+    function showTest() {
+      showSection('test');
+    }
+
+    function moveNo() {
+      const button = document.getElementById('noButton');
+      const x = Math.random() * 160 - 80;
+      const y = Math.random() * 100 - 50;
+
+      button.style.transform = `translate(${x}px, ${y}px)`;
+      button.textContent = 'Essaie encore 😂';
+    }
+
+    function showFinal() {
+      showSection('final');
+    }
+  </script>
+</body>
+  </html>
