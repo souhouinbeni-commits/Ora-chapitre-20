@@ -4,113 +4,130 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORA — Chapitre 20 ❤️</title>
+<meta name="theme-color" content="#120d18">
+<title>ORA — Chapitre 20</title>
 <style>
-:root {
-  --bg: #100b10;
-  --panel: #1c131c;
-  --cream: #fff4f5;
-  --accent: #ff8fa8;
-  --muted: #c5aeb8;
-  --line: #513342;
+:root{
+  --bg:#120d18;
+  --panel:#201729;
+  --cream:#f7efe4;
+  --muted:#c0b3c6;
+  --accent:#d9a4a9;
+  --gold:#e5c99a;
+  --line:#49374e
 }
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--cream);
-  font-family: Georgia, serif;
-  min-height: 100vh;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--cream);
+  font-family:Georgia,"Times New Roman",serif
 }
-button { cursor: pointer; font: inherit; }
-.screen {
-  display: none;
-  min-height: 100vh;
-  padding: 35px 18px;
-  align-items: center;
-  justify-content: center;
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.screen{
+  display:none;min-height:100svh;padding:28px 18px;
+  align-items:center;justify-content:center;position:relative;overflow:hidden
 }
-.screen.active { display: flex; }
-.wrap { width: 100%; max-width: 760px; margin: auto; }
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--accent);
-  font: 11px Arial, sans-serif;
-  margin-bottom: 18px;
+.screen.active{display:flex;animation:appear .45s ease both}
+@keyframes appear{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
 }
-h1 { font-size: clamp(35px, 7vw, 62px); line-height: 1.1; margin: 0 0 20px; }
-h2 { font-size: clamp(25px, 5vw, 38px); line-height: 1.2; }
-p { color: var(--muted); line-height: 1.8; font-size: 16px; }
-.small { font: 12px/1.7 Arial, sans-serif; color: var(--muted); }
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 24px;
-  margin: 22px 0;
+.wrap{width:min(760px,100%);margin:auto;position:relative;z-index:1}
+.center{text-align:center}
+.eyebrow{
+  font:10px/1.6 Arial,sans-serif;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold)
 }
-.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
-.btn {
-  border: 1px solid var(--accent);
-  border-radius: 30px;
-  background: var(--accent);
-  color: #260f19;
-  padding: 13px 22px;
-  font: bold 13px Arial, sans-serif;
+h1{
+  font-size:clamp(2.8rem,10vw,6rem);line-height:.96;
+  letter-spacing:-.05em;font-weight:400;margin:20px 0
 }
-.btn.alt { background: transparent; color: var(--cream); }
-.btn:hover { transform: translateY(-2px); }
-.center { text-align: center; }
-.envelope {
-  width: 180px; height: 125px; margin: 35px auto;
-  border: 2px solid var(--accent); border-radius: 10px;
-  display: grid; place-items: center; font-size: 54px;
-  background: linear-gradient(135deg,#291724,#120d13);
-  box-shadow: 0 0 35px #ff8fa822;
+h2{font-size:clamp(1.8rem,6vw,3.1rem);font-weight:400;line-height:1.08;margin:12px 0 18px}
+h3{font-size:1.25rem;font-weight:400;margin:0 0 10px}
+p{font-size:1rem;line-height:1.8;color:var(--muted);margin:0 0 16px}
+strong{color:var(--cream)}
+.rule{height:1px;background:var(--line);margin:24px 0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.actions button{flex:1;min-width:145px}
+.btn{
+  border:1px solid var(--accent);background:var(--accent);color:#21131f;
+  padding:14px 18px;text-transform:uppercase;letter-spacing:.1em;
+  font:700 10px Arial,sans-serif;transition:transform .18s,background .18s
 }
-.count { font-size: clamp(80px,20vw,150px); color: var(--accent); }
-.gallery {
-  display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px;
+.btn:hover{transform:translateY(-2px)}
+.btn.alt{background:transparent;color:var(--cream);border-color:var(--line)}
+.small{font:11px/1.7 Arial,sans-serif;letter-spacing:.08em;color:#9e8fa7}
+.panel{background:var(--panel);border:1px solid var(--line);padding:clamp(20px,5vw,36px);margin:18px 0}
+.tag{
+  display:inline-block;color:var(--gold);font:10px Arial,sans-serif;
+  text-transform:uppercase;letter-spacing:.17em;border:1px solid var(--line);
+  padding:7px 9px;margin-bottom:12px
 }
-.gallery img,.gallery video {
-  width: 100%; aspect-ratio: 4/5; object-fit: cover;
-  border-radius: 12px; border: 1px solid var(--line);
-  background: #211620;
+.envelope-wrap{
+  width:min(290px,75vw);height:200px;margin:34px auto 30px;
+  position:relative;cursor:pointer;perspective:800px
 }
-.gallery .wide { grid-column: 1/-1; }
-.game { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin: 25px 0; }
-.game button { min-width: 110px; }
-.quiz-option {
-  display: block; width: 100%; margin: 10px 0;
-  padding: 15px; border: 1px solid var(--line);
-  border-radius: 10px; background: var(--panel);
-  color: var(--cream); text-align: left;
+.envelope{
+  position:absolute;inset:35px 0 0;background:#9b667b;
+  border-radius:5px;box-shadow:0 20px 50px #0005
 }
-.quiz-option:hover { border-color: var(--accent); }
-.mood-grid {
-  display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 12px; margin: 24px 0;
+.envelope:before{
+  content:"";position:absolute;inset:0;background:#c28b9a;
+  clip-path:polygon(0 0,50% 57%,100% 0);
+  transform-origin:top;transition:transform .7s;z-index:3
 }
-.mood-btn {
-  display: flex; flex-direction: column; align-items: flex-start;
-  text-align: left; gap: 8px; padding: 18px 15px;
-  background: var(--panel); border: 1px solid var(--line);
-  border-radius: 14px; color: var(--cream); min-height: 120px;
+.envelope:after{
+  content:"";position:absolute;inset:0;background:#b77d90;
+  clip-path:polygon(0 100%,50% 47%,100% 100%);z-index:2
 }
-.mood-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
-.mood-btn span { font-size: 25px; }
-.mood-btn strong { font-size: 15px; font-weight: normal; }
-.mood-btn small { font: 11px/1.5 Arial,sans-serif; color: var(--muted); }
-.mood-message { border-color: var(--accent); }
-[hidden] { display: none !important; }
-footer { text-align: center; padding: 20px; color: var(--muted); font: 11px Arial,sans-serif; }
-@media(max-width:520px) {
-  .gallery { grid-template-columns: 1fr; }
-  .mood-grid { grid-template-columns: 1fr 1fr; }
-  .mood-btn { padding: 14px 10px; min-height: 125px; }
-  .actions { flex-direction: column; }
-  .actions button { width: 100%; }
+.letter-peek{
+  position:absolute;left:10%;width:80%;height:115px;bottom:28px;
+  background:var(--cream);color:#49313e;padding:22px 8px;text-align:center;
+  font:11px Arial,sans-serif;letter-spacing:.12em;transition:transform .7s;z-index:1
+}
+.seal{
+  position:absolute;left:50%;top:80px;transform:translateX(-50%);z-index:4;
+  width:42px;height:42px;border-radius:50%;background:var(--gold);color:#3a2531;
+  display:grid;place-items:center;font-size:18px;box-shadow:0 3px 10px #0003
+}
+.envelope-wrap.open .envelope:before{transform:rotateX(180deg)}
+.envelope-wrap.open .letter-peek{transform:translateY(-65px)}
+.big-age{font-size:clamp(6rem,25vw,11rem);line-height:1;color:var(--accent);margin:15px 0}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.memory{border:1px solid var(--line);background:#17101d;padding:9px;margin:0}
+.memory img,.memory video{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;background:#2b2030}
+.memory figcaption{font:11px/1.6 Arial,sans-serif;color:var(--muted);padding:9px 3px 2px}
+.game-area{position:relative;min-height:170px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;overflow:hidden}
+#yesBtn{min-width:120px}
+#noBtn{position:relative;transition:left .15s,top .15s}
+#status{min-height:24px;text-align:center;color:var(--gold);font:12px/1.6 Arial,sans-serif;margin-top:12px}
+.letter-text p{margin:0 0 15px}
+footer{text-align:center;padding:25px;font:10px Arial,sans-serif;color:#86768f;letter-spacing:.12em}
+
+.mood-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}
+.mood-btn{
+  display:flex;flex-direction:column;align-items:flex-start;text-align:left;
+  gap:8px;padding:18px 15px;background:var(--panel);
+  border:1px solid var(--line);color:var(--cream);min-height:120px;
+  transition:transform .2s,border-color .2s
+}
+.mood-btn:hover{transform:translateY(-3px);border-color:var(--accent)}
+.mood-btn span{font-size:25px}
+.mood-btn strong{font-size:15px;font-weight:400}
+.mood-btn small{font:11px/1.5 Arial,sans-serif;color:var(--muted)}
+.mood-message{border-color:var(--accent)}
+[hidden]{display:none!important}
+@media(max-width:520px){
+  .cards{grid-template-columns:1fr}
+  .actions{flex-direction:column}
+  .actions button{width:100%}
+  .envelope-wrap{height:185px}
+  .mood-grid{grid-template-columns:1fr 1fr}
+  .mood-btn{padding:14px 10px;min-height:125px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
 </style>
 </head>
@@ -118,259 +135,325 @@ footer { text-align: center; padding: 20px; color: var(--muted); font: 11px Aria
 <main>
 
 <section class="screen active" id="s0">
-  <div class="wrap center">
-    <div class="eyebrow">Un petit secret t’attend</div>
-    <h1>Pour toi, <span style="color:var(--accent)">Ora</span> ❤️</h1>
-    <p>Avant d’entrer dans ton nouveau chapitre, ouvre cette petite surprise.</p>
-    <div class="envelope">💌</div>
-    <button class="btn" onclick="go(1)">Ouvre-moi</button>
+ <div class="wrap center">
+  <div class="eyebrow">Un petit quelque chose pour toi</div>
+  <h1>ORA<br><span style="color:var(--accent)">Chapitre 20</span></h1>
+  <p>Cinq ans d’amitié. Des souvenirs, des fous rires et encore plein de chapitres à écrire.</p>
+  <div class="envelope-wrap" id="envelope" role="button" tabindex="0" aria-label="Ouvrir l’enveloppe">
+   <div class="envelope">
+    <div class="letter-peek">POUR ORA<br><br>À OUVRIR AVEC LE SOURIRE</div>
+   </div>
+   <div class="seal">♥</div>
   </div>
+  <button class="btn" onclick="openEnvelope()">Ouvrir mon cadeau →</button>
+  <p class="small" style="margin-top:18px">3 MARS · ÉDITION SPÉCIALE</p>
+ </div>
 </section>
 
 <section class="screen" id="s1">
-  <div class="wrap center">
-    <div class="eyebrow">Prépare-toi, Ora</div>
-    <div class="count" id="count">3</div>
-    <h2>Un nouveau chapitre commence…</h2>
-    <button class="btn" onclick="go(2)">Découvrir ma surprise ❤️</button>
-  </div>
+ <div class="wrap center">
+  <div class="eyebrow">Attends un peu…</div>
+  <div class="big-age" id="count">3</div>
+  <h2>Le chapitre spécial commence maintenant.</h2>
+  <p>Reste jusqu’à la fin, madame la célébrité 😂</p>
+  <button class="btn" onclick="go(2)">Je suis prête →</button>
+ </div>
 </section>
 
 <section class="screen" id="s2">
-  <div class="wrap center">
-    <div class="eyebrow">Joyeux anniversaire</div>
-    <h1>ORA — <span style="color:var(--accent)">Chapitre 20</span></h1>
-    <p>20 bougies, une nouvelle page et encore tellement de beaux souvenirs à créer.</p>
-    <div class="panel">
-      <h2>5 ans d’amitié ❤️</h2>
-      <p>Cinq années de souvenirs, de conversations, de délires et de moments qui ont construit une belle histoire. Aujourd’hui, c’est à ton tour d’être célébrée.</p>
-    </div>
-    <button class="btn" onclick="go(3)">Découvrir nos souvenirs →</button>
+ <div class="wrap">
+  <div class="eyebrow">03 mars · Joyeux anniversaire</div>
+  <h1>Bienvenue dans<br><span style="color:var(--accent)">ton chapitre 20.</span></h1>
+  <p>Aujourd’hui, c’est ton jour. Alors prends ton temps, lis tranquillement et profite ❤️</p>
+  <div class="rule"></div>
+  <div class="panel">
+   <span class="tag">Bon, toi alors 😂</span>
+   <h2>Les petits trucs que j’aime chez toi</h2>
+   <h3>Déjà, ta taille ❤️</h3>
+   <p>Moi je kiffe hein 😂❤️ Et si parfois tu te prends la tête avec ça, sache que je te trouve très bien comme tu es. Pas besoin de te comparer à qui que ce soit.</p>
+   <div class="rule"></div>
+   <h3>Et la cuisine maintenant 😭😂</h3>
+   <p>Tu sais très bien que j’aime trop manger. Quand tu cuisines pour moi, tu me régales. Tu m’as habitué aux bons bails, après je vais faire comment sans ça ? 😂❤️</p>
+   <p>Au-delà des taquineries, j’aime aussi la façon dont tu prends soin de moi. Ça compte vraiment.</p>
   </div>
+  <div class="actions"><button class="btn alt" onclick="go(1)">← Retour</button><button class="btn" onclick="go(3)">La suite →</button></div>
+ </div>
 </section>
 
 <section class="screen" id="s3">
-  <div class="wrap">
-    <div class="eyebrow">Notre petite galerie</div>
-    <h1>Des souvenirs à garder ❤️</h1>
-    <p>Ajoute tes photos et vidéos dans le même dossier que ce fichier HTML, en gardant les noms ci-dessous.</p>
-    <div class="gallery">
-      <img src="ora-photo-1.jpg" alt="Souvenir avec Ora">
-      <img src="ora-photo-2.jpg" alt="Un autre souvenir">
-      <img class="wide" src="ora-photo-3.jpg" alt="Un souvenir spécial">
-      <video controls src="ora-video-1.mp4"></video>
-      <video controls src="ora-video-2.mp4"></video>
-      <video class="wide" controls src="ora-video-3.mp4"></video>
-    </div>
-    <div class="actions">
-      <button class="btn alt" onclick="go(2)">← Retour</button>
-      <button class="btn" onclick="go(4)">Continuer →</button>
-    </div>
+ <div class="wrap">
+  <div class="eyebrow">Notre petite galerie</div>
+  <h2>Les souvenirs parlent mieux que nous 😂</h2>
+  <p>Remplace les fichiers d’exemple par vos vraies photos et vidéos. Garde les mêmes noms pour que ça s’affiche automatiquement.</p>
+  <div class="cards">
+   <figure class="memory"><img src="ora-photo-1.jpg" alt="Souvenir avec Ora"><figcaption>Un souvenir ❤️ — ora-photo-1.jpg</figcaption></figure>
+   <figure class="memory"><img src="ora-photo-2.jpg" alt="Deuxième souvenir avec Ora"><figcaption>Encore nous 😂 — ora-photo-2.jpg</figcaption></figure>
+   <figure class="memory"><img src="ora-photo-3.jpg" alt="Troisième souvenir avec Ora"><figcaption>Cinq ans déjà — ora-photo-3.jpg</figcaption></figure>
+   <figure class="memory"><video controls playsinline preload="metadata" poster="ora-video-cover.jpg"><source src="ora-video.mp4" type="video/mp4">Ton navigateur ne prend pas cette vidéo en charge.</video><figcaption>La vidéo souvenir — ora-video.mp4</figcaption></figure>
   </div>
+  <div class="panel"><p><strong>Petit rappel :</strong> les photos et la vidéo ne sont pas incluses dans ce code. Mets tes fichiers à côté de index.html et donne-leur les noms indiqués.</p></div>
+  <div class="actions"><button class="btn alt" onclick="go(2)">← Retour</button><button class="btn" onclick="go(4)">J’ai une question pour toi →</button></div>
+ </div>
 </section>
 
 <section class="screen" id="s4">
-  <div class="wrap center">
-    <div class="eyebrow">Question très importante</div>
-    <h1>Alors Ora…<br>tu as aimé ? 🥹</h1>
-    <p>Attention, réfléchis bien avant de répondre 😭</p>
-    <div class="game">
-      <button class="btn" id="yesBtn" onclick="go(5)">OUI ❤️</button>
-      <button class="btn alt" id="noBtn" onclick="moveNo()">NON 😭</button>
-    </div>
-    <p class="small">Indice : le bouton OUI est beaucoup plus gentil.</p>
+ <div class="wrap center">
+  <div class="eyebrow">Réponds honnêtement 😭</div>
+  <h1>Alors Ora…<br><span style="color:var(--accent)">tu as aimé ?</span></h1>
+  <p>Attention, ta réponse sera retenue contre toi 😂❤️</p>
+  <div class="panel">
+   <div class="game-area" id="gameArea">
+    <button id="yesBtn" class="btn" onclick="chooseYes()">OUI ❤️</button>
+    <button id="noBtn" class="btn alt" onclick="chooseNo()" onmouseenter="dodgeNo()" ontouchstart="dodgeNo()">NON 😭</button>
+   </div>
+   <div id="status" aria-live="polite"></div>
   </div>
+  <div class="actions"><button class="btn alt" onclick="go(3)">← Retour</button><button class="btn" id="toLetter" onclick="go(5)" hidden>Lire ton message →</button></div>
+ </div>
 </section>
 
+<!-- La partie 2 commence ici : colle-la immédiatement après cette ligne. -->
+
 <section class="screen" id="s5">
-  <div class="wrap">
-    <div class="eyebrow">Petit quiz entre nous</div>
-    <h1>Tu me connais vraiment ? 👀</h1>
-    <p id="question">Question 1/5</p>
-    <div id="options"></div>
-    <p id="quizFeedback" aria-live="polite"></p>
-    <div class="actions">
-      <button class="btn" onclick="nextQuestion()">Question suivante →</button>
-      <button class="btn alt" onclick="go(6)">Passer au message ❤️</button>
-    </div>
+ <div class="wrap">
+  <div class="eyebrow">Un petit test entre nous</div>
+  <h1>Ora, parlons un peu de <span style="color:var(--accent)">toi.</span></h1>
+  <p>Ce n’est pas un examen. C’est un petit moment pour te rappeler que tu as le droit de ressentir les choses, d’avoir des jours difficiles et de recevoir autant d’amour que tu en donnes.</p>
+  <div class="panel">
+   <div class="tag" id="quizStep">Question 1 sur 8</div>
+   <h2 id="quizTitle">Comment tu te sens vraiment ?</h2>
+   <p id="quizPrompt">Choisis la réponse qui te ressemble le plus en ce moment.</p>
+   <div id="quizOptions"></div>
+   <p id="quizFeedback" aria-live="polite"></p>
+   <div class="actions">
+    <button class="btn alt" id="quizBack" onclick="previousQuiz()" hidden>← Précédent</button>
+    <button class="btn" id="quizNext" onclick="nextQuiz()" disabled>Continuer →</button>
+   </div>
   </div>
+  <p class="small">Il n’y a pas de mauvaise réponse. Tu peux répondre honnêtement, sans avoir peur d’être jugée. ❤️</p>
+ </div>
 </section>
 
 <section class="screen" id="s6">
-  <div class="wrap">
-    <div class="eyebrow">Quelques mots pour toi</div>
-    <h1>À toi, Ora ❤️</h1>
-    <div class="panel">
-      <p>Ma Ora, aujourd’hui tu entres dans une nouvelle année de ta vie et je veux que tu saches que tu comptes énormément. Cinq ans d’amitié, ce n’est pas rien : il y a eu des rires, des discussions, des souvenirs et des moments qui nous ont rapprochés.</p>
-      <p>Je te souhaite de trouver la paix dans les moments compliqués, de garder confiance en toi quand tu doutes et de ne jamais oublier que tu mérites le bonheur, le respect et l’amour sincère. Tu n’as pas besoin d’être parfaite pour être une personne précieuse.</p>
-      <p>J’espère que cette nouvelle année t’apportera de belles surprises, des occasions de grandir, des raisons de sourire et des souvenirs dont tu seras fière. Joyeux anniversaire, Ora. Que ton chapitre 20 soit beau, doux et rempli de bonnes choses. ❤️</p>
-    </div>
-    <div class="actions">
-      <button class="btn alt" onclick="go(5)">← Retour au quiz</button>
-      <button class="btn" onclick="go(7)">La suite ❤️</button>
-    </div>
+ <div class="wrap">
+  <div class="eyebrow">Un message du cœur</div>
+  <h1>À toi, <span style="color:var(--accent)">Ora.</span></h1>
+  <div class="panel letter-text">
+   <p>Ma Ora ❤️</p>
+   <p>Joyeux anniversaire à toi. Aujourd’hui, tu as 20 ans, et même si je ne trouve pas toujours les mots parfaits pour dire ce que je ressens, je veux profiter de cette journée pour te rappeler la place que tu as dans ma vie.</p>
+   <p>Cinq ans d’amitié, ce n’est pas rien. Cinq ans de discussions, de délires, de moments où on se comprend, de petites histoires qu’on est les seuls à connaître et de souvenirs qui, même simples, ont une vraie valeur pour moi.</p>
+   <p>Ce que j’apprécie chez toi, ce n’est pas seulement ce qu’on partage quand tout va bien. C’est aussi ta présence, tes attentions, les fois où tu prends de mes nouvelles, où tu m’écoutes, où tu trouves un moyen de me faire sourire. Peut-être que tu ne réalises pas toujours l’effet que ça peut avoir, mais ces petites choses comptent beaucoup.</p>
+   <p>Je sais que la vie ne sera pas toujours facile. Il y aura des jours où tu seras heureuse, d’autres où tu seras fatiguée, triste, inquiète ou simplement lassée de tout. Et je veux que tu te rappelles une chose : tu n’as pas besoin d’être forte tout le temps. Tu as le droit de ne pas aller bien, de parler, de pleurer, de demander de l’aide ou de prendre du recul.</p>
+   <p>Je te souhaite de grandir sans perdre ce qui fait de toi la personne que tu es. De croire davantage en toi, de réaliser tes projets à ton rythme et de rencontrer des personnes qui te respectent vraiment. Je te souhaite des journées où tu ris sans te forcer, des nuits où ton esprit se repose et des moments où tu te sens appréciée sans devoir faire quoi que ce soit pour le mériter.</p>
+   <p>Et surtout, ne sois pas trop dure avec toi-même. Tu n’as pas besoin d’être parfaite, de tout réussir immédiatement ou de ressembler à quelqu’un d’autre. Tu as le droit d’apprendre, de te tromper, de changer d’avis et de recommencer. Ta valeur ne disparaît pas parce que tu traverses une période compliquée.</p>
+   <p>Je ne prétends pas avoir toujours la bonne réaction ni savoir exactement ce que tu ressens. Mais je veux que tu saches que ton amitié a de l’importance pour moi. Je suis reconnaissant pour les moments qu’on a partagés et pour tous ceux qu’on aura encore l’occasion de créer.</p>
+   <p>Alors, pour tes 20 ans, je ne te souhaite pas seulement de recevoir des cadeaux ou de passer une belle journée. Je te souhaite une année qui te fasse du bien, qui t’aide à mieux te connaître, à te sentir fière de toi et à avancer vers ce qui te rend heureuse.</p>
+   <p>Joyeux anniversaire, Ora. Merci pour ces cinq années d’amitié, pour les souvenirs et pour la place que tu occupes dans mon histoire. Prends soin de toi, même quand personne ne te le rappelle. Tu mérites aussi toute la douceur que tu offres aux autres.</p>
+   <p><strong>Avec toute mon affection, pour ton chapitre 20. ❤️</strong></p>
   </div>
+  <div class="actions">
+   <button class="btn alt" onclick="go(5)">← Retour au test</button>
+   <button class="btn" onclick="go(7)">Découvrir ton petit refuge →</button>
+  </div>
+  <p class="small">Note : cette lettre est une version reconstruite à partir de ce que nous avons défini ensemble. Ce n’est pas garanti que ce soit mot pour mot la lettre originale que tu avais écrite.</p>
+ </div>
 </section>
 
 <section class="screen" id="s7">
-  <div class="wrap center">
-    <div class="eyebrow">Et n’oublie jamais</div>
-    <h1>Tu comptes, Ora. ❤️</h1>
-    <p>Que cette nouvelle année te rapproche de tes rêves et t’offre des raisons de sourire, même les jours où tout semble compliqué.</p>
-    <div class="panel">
-      <h2>Un petit refuge pour toi</h2>
-      <p>Quand tu as besoin d’un peu de douceur, tu peux venir choisir un message adapté à ce que tu ressens.</p>
-    </div>
-    <div class="actions" style="justify-content:center">
-      <button class="btn" onclick="go(9)">Choisir ce que je ressens ❤️</button>
-      <button class="btn alt" onclick="go(8)">Quelques rappels doux</button>
-      <button class="btn alt" onclick="go(0)">Revoir le site ↺</button>
-    </div>
+ <div class="wrap center">
+  <div class="eyebrow">À ouvrir quand tu en as besoin</div>
+  <h1>Un petit refuge<br><span style="color:var(--accent)">pour toi.</span></h1>
+  <p>Il n’y a pas que les jours heureux qui méritent de beaux mots. Choisis ce que tu ressens, et laisse-toi quelques instants pour lire.</p>
+  <div class="panel">
+   <h2>Tu n’as pas besoin de tout porter toute seule.</h2>
+   <p>Tu peux être triste, inquiète, fatiguée, en colère ou pleine de doutes. Tu n’as pas besoin de cacher tes émotions pour mériter de l’affection.</p>
   </div>
+  <div class="actions" style="justify-content:center">
+   <button class="btn" onclick="go(8)">Choisir mon émotion ❤️</button>
+   <button class="btn alt" onclick="go(9)">Lire quelques rappels</button>
+  </div>
+ </div>
 </section>
 
 <section class="screen" id="s8">
-  <div class="wrap">
-    <div class="eyebrow">À relire quand tu en as besoin</div>
-    <h1>Quelques rappels doux ❤️</h1>
-    <div class="panel">
-      <p>Tu as le droit de faire une pause sans culpabiliser.</p>
-      <p>Tu n’as pas besoin d’être parfaite pour mériter de belles choses.</p>
-      <p>Un mauvais jour ne veut pas dire que toute ta vie va mal.</p>
-      <p>Tu peux demander de l’aide : tu n’as pas à tout porter toute seule.</p>
-      <p>Tu mérites qu’on t’écoute, qu’on te respecte et qu’on prenne soin de toi aussi.</p>
-    </div>
-    <div class="actions">
-      <button class="btn alt" onclick="go(7)">← Retour</button>
-      <button class="btn" onclick="go(9)">Choisir ce que je ressens ❤️</button>
-    </div>
+ <div class="wrap">
+  <div class="eyebrow">Ton petit refuge, Ora ❤️</div>
+  <h1>Comment tu te sens<br><span style="color:var(--accent)">en ce moment ?</span></h1>
+  <p>Choisis ce qui ressemble le plus à ce que tu ressens. Un message t’attend pour ce moment précis.</p>
+  <div class="mood-grid">
+   <button class="mood-btn" onclick="showMood('triste')"><span>😔</span><strong>Je suis triste</strong><small>J’ai le cœur lourd</small></button>
+   <button class="mood-btn" onclick="showMood('angoisse')"><span>🫂</span><strong>Je suis angoissée</strong><small>J’ai trop de pensées</small></button>
+   <button class="mood-btn" onclick="showMood('fatigue')"><span>😩</span><strong>Je suis épuisée</strong><small>J’ai besoin de souffler</small></button>
+   <button class="mood-btn" onclick="showMood('seule')"><span>🥹</span><strong>Je me sens seule</strong><small>J’ai besoin de présence</small></button>
+   <button class="mood-btn" onclick="showMood('doute')"><span>🪞</span><strong>Je doute de moi</strong><small>Je ne me sens pas assez bien</small></button>
+   <button class="mood-btn" onclick="showMood('reconfort')"><span>❤️</span><strong>J’ai besoin de réconfort</strong><small>Juste un peu de douceur</small></button>
+   <button class="mood-btn" onclick="showMood('colere')"><span>😤</span><strong>Je suis énervée</strong><small>Tout m’agace aujourd’hui</small></button>
+   <button class="mood-btn" onclick="showMood('motivation')"><span>🌱</span><strong>J’ai besoin de courage</strong><small>Je veux reprendre confiance</small></button>
   </div>
+  <div class="panel mood-message" id="moodMessage" hidden aria-live="polite">
+   <div class="eyebrow" id="moodLabel">Un message pour toi</div>
+   <h2 id="moodTitle">Ora, lis ça doucement ❤️</h2>
+   <p id="moodText"></p>
+   <div class="actions">
+    <button class="btn alt" onclick="anotherMoodMessage()">Un autre message →</button>
+    <button class="btn" onclick="go(9)">Quelques rappels</button>
+   </div>
+  </div>
+  <p class="small">Si tu traverses quelque chose de très difficile, tu peux aussi en parler à une personne de confiance. Tu mérites d’être soutenue dans la vraie vie également. ❤️</p>
+  <div class="actions"><button class="btn alt" onclick="go(7)">← Retour</button><button class="btn alt" onclick="go(0)">Revoir le site ↺</button></div>
+ </div>
 </section>
 
 <section class="screen" id="s9">
-<div class="wrap">
-<div class="eyebrow">Ton petit refuge, Ora ❤️</div>
-<h1>Comment tu te sens<br><span style="color:var(--accent)">en ce moment ?</span></h1>
-<p>Choisis ce qui ressemble le plus à ce que tu ressens. Tu recevras un petit message pour ce moment précis. Et si tu ne sais pas comment expliquer ce qui se passe, tu peux simplement choisir « j’ai besoin de douceur ».</p>
-<div class="mood-grid">
-<button class="mood-btn" onclick="showMood('triste')"><span>😔</span><strong>Je suis triste</strong><small>J’ai le cœur lourd</small></button>
-<button class="mood-btn" onclick="showMood('angoisse')"><span>🫂</span><strong>Je suis angoissée</strong><small>J’ai trop de pensées</small></button>
-<button class="mood-btn" onclick="showMood('fatigue')"><span>😩</span><strong>Je suis épuisée</strong><small>J’ai besoin de souffler</small></button>
-<button class="mood-btn" onclick="showMood('seule')"><span>🥹</span><strong>Je me sens seule</strong><small>J’ai besoin de présence</small></button>
-<button class="mood-btn" onclick="showMood('doute')"><span>🪞</span><strong>Je doute de moi</strong><small>Je me sens pas assez bien</small></button>
-<button class="mood-btn" onclick="showMood('reconfort')"><span>❤️</span><strong>J’ai besoin de réconfort</strong><small>Juste un peu de douceur</small></button>
-<button class="mood-btn" onclick="showMood('colere')"><span>😤</span><strong>Je suis énervée</strong><small>Tout m’agace aujourd’hui</small></button>
-<button class="mood-btn" onclick="showMood('motivation')"><span>🌱</span><strong>J’ai besoin de courage</strong><small>Je veux reprendre confiance</small></button>
-</div>
-<div class="panel mood-message" id="moodMessage" hidden aria-live="polite">
-<div class="eyebrow" id="moodLabel">Un message pour toi</div>
-<h2 id="moodTitle">Ora, lis ça doucement ❤️</h2>
-<p id="moodText"></p>
-<div class="actions">
-<button class="btn alt" onclick="anotherMoodMessage()">Un autre message →</button>
-<button class="btn" onclick="go(8)">Retour aux rappels</button>
-</div>
-</div>
-<p class="small">Tu peux revenir sur cette page chaque fois que tu en ressens le besoin. Ce site ne remplace pas une personne de confiance ou un professionnel si tu traverses quelque chose de difficile, mais il peut être un petit rappel que tu comptes. ❤️</p>
-<div class="actions"><button class="btn alt" onclick="go(8)">← Retour</button><button class="btn" onclick="go(0)">Revoir le site ↺</button></div>
-</div>
+ <div class="wrap">
+  <div class="eyebrow">Quelques rappels doux</div>
+  <h1>Lis ceci doucement. ❤️</h1>
+  <div class="panel">
+   <p>Tu as le droit de faire une pause sans culpabiliser.</p>
+   <p>Tu n’as pas besoin d’être parfaite pour mériter de belles choses.</p>
+   <p>Un mauvais jour ne veut pas dire que toute ta vie va mal.</p>
+   <p>Tu peux demander de l’aide. Tu n’as pas à tout porter toute seule.</p>
+   <p>Tu mérites qu’on t’écoute, qu’on te respecte et qu’on prenne soin de toi aussi.</p>
+   <p>Tu n’as pas à trouver toutes les réponses aujourd’hui. Un pas à la fois, Ora. ❤️</p>
+  </div>
+  <div class="actions"><button class="btn alt" onclick="go(8)">← Retour aux émotions</button><button class="btn" onclick="go(0)">Revoir le site ↺</button></div>
+ </div>
 </section>
-
 </main>
-<footer>Fait avec affection pour Ora — Chapitre 20 ❤️</footer>
+<footer>Un petit cadeau fait avec affection pour Ora ❤️</footer>
 <script>
-function go(n) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const target = document.getElementById('s' + n);
-  if (target) target.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-  if (n === 1) startCountdown();
-  if (n === 5) renderQuestion();
+
+function go(n){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ const target=document.getElementById('s'+n);
+ if(target)target.classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+ if(n===5)renderQuiz();
 }
-let countStarted=false;
+function openEnvelope(){
+ const env=document.getElementById('envelope');
+ env.classList.add('open');
+ setTimeout(()=>go(1),750);
+}
+document.getElementById('envelope').addEventListener('keydown',e=>{
+ if(e.key==='Enter'||e.key===' '){e.preventDefault();openEnvelope();}
+});
+let countdownStarted=false;
 function startCountdown(){
-  if(countStarted)return;
-  countStarted=true;
-  let n=3;
-  const el=document.getElementById('count');
-  el.textContent=n;
-  const timer=setInterval(()=>{
-    n--;
-    if(n>0)el.textContent=n;
-    else {clearInterval(timer);el.textContent='❤️';}
-  },800);
+ if(countdownStarted)return;
+ countdownStarted=true;
+ let n=3;const el=document.getElementById('count');
+ el.textContent=n;
+ const timer=setInterval(()=>{
+  n--;
+  if(n>0)el.textContent=n;
+  else{clearInterval(timer);el.textContent='❤️';}
+ },800);
 }
-let noMoves=0;
-function moveNo(){
-  const b=document.getElementById('noBtn');
-  const msgs=['Tu es sûre ? 😭','Réfléchis encore 😂','Le OUI est juste là ❤️','Tu ne vas pas m’avoir 😭'];
-  b.textContent=msgs[noMoves%msgs.length];noMoves++;
-  b.style.transform=`translate(${Math.random()*100-50}px,${Math.random()*60-30}px)`;
-  const yes=document.getElementById('yesBtn');
-  yes.style.transform=`scale(${Math.min(1+noMoves*.12,2)})`;
+let noCount=0;
+function dodgeNo(){
+ const b=document.getElementById('noBtn');
+ const area=document.getElementById('gameArea');
+ const maxX=Math.max(0,area.clientWidth-b.offsetWidth-10);
+ b.style.position='relative';
+ b.style.left=(Math.random()*Math.min(maxX,100)-Math.min(maxX,50))+'px';
+ b.style.top=(Math.random()*36-18)+'px';
+ noCount++;
+ document.getElementById('yesBtn').style.transform=`scale(${Math.min(1+noCount*.08,1.6)})`;
+ const lines=['Tu es vraiment sûre ? 😭','Essaie encore 😂','Le OUI est juste là ❤️','Hmm, je ne te crois pas 😭'];
+ document.getElementById('status').textContent=lines[noCount%lines.length];
 }
-const questions=[
- {q:"Quel genre de moment me fait le plus plaisir ?",opts:["Les moments sincères et les délires","Les disputes sans fin","Ignorer tout le monde"],correct:0,feedback:"Les moments simples et sincères restent les meilleurs ❤️"},
- {q:"Après cinq ans d’amitié, qu’est-ce qui compte le plus ?",opts:["Les cadeaux uniquement","Les souvenirs et la présence","Qui a raison tout le temps"],correct:1,feedback:"Exactement : les souvenirs et la présence comptent énormément 🫂"},
- {q:"Quand tu traverses une journée difficile, tu mérites…",opts:["De tout garder pour toi","De te culpabiliser","De l’écoute et de la douceur"],correct:2,feedback:"Tu mérites de l’écoute et de la douceur ❤️"},
- {q:"Avoir 20 ans veut dire…",opts:["Tout devoir réussir immédiatement","Avoir encore le droit d’apprendre et de grandir","Ne plus jamais se tromper"],correct:1,feedback:"Tu as le droit d’avancer à ton rythme 🌱"},
- {q:"Quel est le message de ce site ?",opts:["Tu dois toujours être forte","Tu comptes et tu mérites du bonheur","Tu dois tout faire seule"],correct:1,feedback:"Oui Ora : tu comptes, même les jours difficiles ❤️"}
+function chooseNo(){dodgeNo();}
+function chooseYes(){
+ document.getElementById('status').textContent='Je savais que tu allais dire oui 😂❤️';
+ document.getElementById('toLetter').hidden=false;
+ document.getElementById('yesBtn').textContent='OUIIIII ❤️';
+}
+const quizData=[
+ {title:'Quand tu te sens triste…',prompt:'Qu’est-ce que tu aimerais pouvoir faire ?',options:['Faire semblant que tout va bien','Pouvoir en parler sans être jugée','Tout régler immédiatement'],feedback:'Tu as le droit de parler de ce que tu ressens sans être jugée. ❤️'},
+ {title:'Quand l’angoisse arrive…',prompt:'Quel rappel peut t’aider ?',options:['Tout prévoir parfaitement','Respirer et revenir au moment présent','Te reprocher de trop penser'],feedback:'Tu n’as pas besoin de résoudre toutes tes inquiétudes d’un seul coup. 🫂'},
+ {title:'Quand tu es épuisée…',prompt:'Qu’est-ce que tu as le droit de faire ?',options:['Continuer jusqu’à craquer','Te comparer aux autres','Faire une pause sans culpabiliser'],feedback:'Le repos est un besoin, pas une récompense que tu dois mériter. ❤️'},
+ {title:'Quand tu doutes de toi…',prompt:'Qu’est-ce que tu dois te rappeler ?',options:['Tu dois être parfaite','Ta valeur ne dépend pas de tes erreurs','Les autres font toujours mieux'],feedback:'Tu peux apprendre et grandir sans être parfaite. 🌱'},
+ {title:'Quand tu te sens seule…',prompt:'Quel petit pas peux-tu essayer ?',options:['T’isoler sans rien dire','Contacter quelqu’un de confiance','Faire semblant d’aller bien'],feedback:'Tu peux demander de la présence. Tu n’as pas à trouver les mots parfaits. 🫂'},
+ {title:'Quand quelqu’un te blesse…',prompt:'Qu’est-ce qui est juste envers toi ?',options:['Tout accepter pour garder la paix','Exprimer tes limites avec respect','Te blâmer automatiquement'],feedback:'Tes émotions comptent aussi. Poser une limite est légitime. ❤️'},
+ {title:'Quand tu as peur de l’avenir…',prompt:'Comment avancer ?',options:['Tout réussir aujourd’hui','Faire un petit pas à la fois','Abandonner avant d’essayer'],feedback:'Un petit pas reste un pas. Tu peux avancer à ton rythme. 🌱'},
+ {title:'Et aujourd’hui, pour tes 20 ans…',prompt:'Quel souhait aimerais-tu garder ?',options:['Ne jamais faire d’erreur','Toujours plaire à tout le monde','Te donner le droit de grandir et d’être heureuse'],feedback:'C’est ça, Ora : tu mérites de grandir, d’apprendre et d’être heureuse. Joyeux anniversaire ❤️'}
 ];
-let qi=0,answered=false;
-function renderQuestion(){
- const q=questions[qi]; if(!q)return;
- document.getElementById('question').textContent=`Question ${qi+1}/${questions.length} — ${q.q}`;
+let quizIndex=0,quizAnswers=[];
+function renderQuiz(){
+ const q=quizData[quizIndex];
+ document.getElementById('quizStep').textContent=`Question ${quizIndex+1} sur ${quizData.length}`;
+ document.getElementById('quizTitle').textContent=q.title;
+ document.getElementById('quizPrompt').textContent=q.prompt;
  document.getElementById('quizFeedback').textContent='';
- document.getElementById('options').innerHTML=q.opts.map((o,i)=>`<button class="quiz-option" onclick="answer(${i})">${o}</button>`).join('');
- answered=false;
+ document.getElementById('quizOptions').innerHTML='';
+ q.options.forEach((opt,i)=>{
+  const b=document.createElement('button');
+  b.className='quiz-option';
+  b.type='button';
+  b.textContent=opt;
+  b.style.cssText='display:block;width:100%;text-align:left;padding:14px;margin:9px 0;background:#201729;color:#f7efe4;border:1px solid #49374e;cursor:pointer';
+  b.onclick=()=>{
+   quizAnswers[quizIndex]=i;
+   document.querySelectorAll('#quizOptions button').forEach(x=>x.style.borderColor='#49374e');
+   b.style.borderColor='#d9a4a9';
+   document.getElementById('quizFeedback').textContent=q.feedback;
+   document.getElementById('quizNext').disabled=false;
+  };
+  document.getElementById('quizOptions').appendChild(b);
+ });
+ document.getElementById('quizNext').disabled=quizAnswers[quizIndex]===undefined;
+ document.getElementById('quizBack').hidden=quizIndex===0;
+ document.getElementById('quizNext').textContent=quizIndex===quizData.length-1?'Terminer le test ❤️':'Continuer →';
 }
-function answer(i){
- if(answered)return;answered=true;
- document.getElementById('quizFeedback').textContent=questions[qi].feedback;
+function nextQuiz(){
+ if(quizAnswers[quizIndex]===undefined)return;
+ if(quizIndex<quizData.length-1){quizIndex++;renderQuiz();}
+ else{quizIndex=0;go(6);}
 }
-function nextQuestion(){
- qi=(qi+1)%questions.length;renderQuestion();
+function previousQuiz(){
+ if(quizIndex>0){quizIndex--;renderQuiz();}
 }
 const moodMessages={
- triste:{label:"Quand ton cœur est lourd",title:"Tu as le droit d’être triste, Ora ❤️",messages:[
- "Ma Ora, tu n’as pas besoin de faire semblant d’aller bien. Si tu as envie de pleurer, pleure. Si tu as besoin de silence, prends un peu de silence. Une journée triste ne résume pas ta vie et elle ne diminue pas ta valeur. Va doucement avec toi-même aujourd’hui. ❤️",
- "J’aimerais que tu puisses te regarder avec la même tendresse que tu offres aux gens que tu aimes. Tu n’as pas à trouver tout de suite une solution à ce qui te fait mal. Pour l’instant, respire et laisse-toi ressentir ce que tu ressens. Tu mérites aussi qu’on prenne soin de toi.",
- "Même si tu n’arrives pas à mettre des mots sur ce qui te rend triste, tu n’as pas à te justifier pour mériter du soutien. Tu peux parler à quelqu’un de confiance, ou simplement dire : « aujourd’hui, ça ne va pas ». C’est déjà suffisant."
+ triste:{label:'Quand ton cœur est lourd',title:'Tu as le droit d’être triste, Ora ❤️',messages:[
+ 'Ma Ora, tu n’as pas besoin de faire semblant d’aller bien. Si tu as envie de pleurer, pleure. Si tu as besoin de silence, prends un peu de silence. Une journée triste ne résume pas ta vie et elle ne diminue pas ta valeur. Va doucement avec toi-même aujourd’hui. ❤️',
+ 'J’aimerais que tu puisses te regarder avec la même tendresse que tu offres aux gens que tu aimes. Tu n’as pas à trouver tout de suite une solution à ce qui te fait mal. Pour l’instant, respire et laisse-toi ressentir ce que tu ressens. Tu mérites aussi qu’on prenne soin de toi.',
+ 'Même si tu n’arrives pas à mettre des mots sur ce qui te rend triste, tu n’as pas à te justifier pour mériter du soutien. Tu peux parler à quelqu’un de confiance, ou simplement dire : « aujourd’hui, ça ne va pas ». C’est déjà suffisant.'
  ]},
- angoisse:{label:"Quand les pensées prennent trop de place",title:"On ralentit un instant, ma Ora 🫂",messages:[
- "Ma Ora, pose un peu tes épaules. Inspire doucement pendant 4 secondes, puis expire lentement pendant 6 secondes. Répète quelques fois sans te forcer. Regarde autour de toi et nomme cinq choses que tu vois. Tu n’as pas besoin de résoudre toutes tes inquiétudes dans cette minute. Reviens juste à maintenant. ❤️",
- "Je sais que parfois la tête peut inventer mille scénarios et que tout paraît urgent. Mais une pensée n’est pas forcément une prédiction. Essaie de séparer ce que tu sais vraiment de ce que tu crains. Puis choisis une seule petite chose que tu peux faire maintenant. Le reste peut attendre.",
- "Tu n’es pas obligée de tout porter toute seule. Si l’angoisse revient souvent ou devient trop difficile à gérer, parle à une personne de confiance ou à un professionnel. Demander de l’aide, ce n’est pas échouer."
+ angoisse:{label:'Quand les pensées prennent trop de place',title:'On ralentit un instant, ma Ora 🫂',messages:[
+ 'Ma Ora, pose un peu tes épaules. Inspire doucement pendant 4 secondes, puis expire lentement pendant 6 secondes. Répète quelques fois sans te forcer. Regarde autour de toi et nomme cinq choses que tu vois. Tu n’as pas besoin de résoudre toutes tes inquiétudes dans cette minute. Reviens juste à maintenant. ❤️',
+ 'Je sais que parfois la tête peut inventer mille scénarios et que tout paraît urgent. Mais une pensée n’est pas forcément une prédiction. Essaie de séparer ce que tu sais vraiment de ce que tu crains. Puis choisis une seule petite chose que tu peux faire maintenant. Le reste peut attendre.',
+ 'Tu n’es pas obligée de tout porter toute seule. Si l’angoisse revient souvent ou devient trop difficile à gérer, parle à une personne de confiance ou à un professionnel. Demander de l’aide, ce n’est pas échouer.'
  ]},
- fatigue:{label:"Quand tu n’as plus beaucoup d’énergie",title:"Tu peux faire une pause, Ora 😩",messages:[
- "Ma Ora, tu n’as pas besoin d’être productive tous les jours. Bois un peu d’eau, mange quelque chose si tu en as besoin, pose ton téléphone quelques minutes et repose-toi si tu peux. Le monde peut attendre un peu. Ta valeur ne dépend pas de tout ce que tu arrives à faire.",
- "Tu as le droit de dire « je suis fatiguée » sans te traiter de paresseuse. Faire une pause n’efface pas tes efforts. Aujourd’hui, choisis le minimum nécessaire et laisse le reste pour plus tard. Un pas à la fois, ma belle. ❤️",
- "Tu n’es pas une machine qui doit toujours être disponible pour tout le monde. Tu as aussi besoin de recevoir l’attention que tu donnes. Essaie de te réserver un petit moment rien que pour toi, même s’il ne dure que cinq minutes."
+ fatigue:{label:'Quand tu n’as plus beaucoup d’énergie',title:'Tu peux faire une pause, Ora 😩',messages:[
+ 'Ma Ora, tu n’as pas besoin d’être productive tous les jours. Bois un peu d’eau, mange quelque chose si tu en as besoin, pose ton téléphone quelques minutes et repose-toi si tu peux. Le monde peut attendre un peu. Ta valeur ne dépend pas de tout ce que tu arrives à faire.',
+ 'Tu as le droit de dire « je suis fatiguée » sans te traiter de paresseuse. Faire une pause n’efface pas tes efforts. Aujourd’hui, choisis le minimum nécessaire et laisse le reste pour plus tard. Un pas à la fois, ma belle. ❤️',
+ 'Tu n’es pas une machine qui doit toujours être disponible pour tout le monde. Tu as aussi besoin de recevoir l’attention que tu donnes. Essaie de te réserver un petit moment rien que pour toi, même s’il ne dure que cinq minutes.'
  ]},
- seule:{label:"Quand tu as l’impression d’être seule",title:"Tu mérites de la présence, ma Ora 🥹",messages:[
- "Ma Ora, se sentir seule peut faire mal même quand il y a du monde autour. Ça ne veut pas dire que tu es oubliée ou que tu ne comptes pas. Si tu peux, envoie un petit message à quelqu’un en qui tu as confiance. Tu n’as pas besoin de trouver les mots parfaits pour demander un peu de présence.",
- "Cinq ans d’amitié, ce sont des souvenirs, des appels, des messages et une place que tu as prise dans ma vie. Je ne peux pas deviner tous les moments où tu ne vas pas bien, alors dis-le-moi quand tu en as besoin. Tu n’as pas à faire semblant avec moi. ❤️",
- "Tu n’as pas besoin d’être toujours drôle, forte ou intéressante pour que les gens aient envie d’être là pour toi. Tu peux juste être toi, même dans un moment silencieux. Tu mérites des relations où tu peux respirer et être sincère."
+ seule:{label:'Quand tu as l’impression d’être seule',title:'Tu mérites de la présence, ma Ora 🥹',messages:[
+ 'Ma Ora, se sentir seule peut faire mal même quand il y a du monde autour. Ça ne veut pas dire que tu es oubliée ou que tu ne comptes pas. Si tu peux, envoie un petit message à quelqu’un en qui tu as confiance. Tu n’as pas besoin de trouver les mots parfaits pour demander un peu de présence.',
+ 'Cinq ans d’amitié, ce sont des souvenirs, des appels, des messages et une place que tu as prise dans ma vie. Je ne peux pas deviner tous les moments où tu ne vas pas bien, alors dis-le-moi quand tu en as besoin. Tu n’as pas à faire semblant avec moi. ❤️',
+ 'Tu n’as pas besoin d’être toujours drôle, forte ou intéressante pour que les gens aient envie d’être là pour toi. Tu peux juste être toi, même dans un moment silencieux. Tu mérites des relations où tu peux respirer et être sincère.'
  ]},
- doute:{label:"Quand tu oublies ta valeur",title:"Ne sois pas si dure avec toi-même 🪞",messages:[
- "Ora, tu n’as pas besoin d’être parfaite pour être aimée. Ta valeur ne se mesure ni à ton apparence, ni à tes erreurs, ni aux choses que tu n’as pas encore accomplies. Tu es une personne entière, avec tes qualités, tes défauts, tes rêves et tes émotions. Ne réduis pas toute ta personne à ce qui te déplaît aujourd’hui. ❤️",
- "Si une amie que tu aimes te parlait comme tu te parles parfois, est-ce que tu la laisserais continuer ? Essaie de t’adresser à toi avec un peu de la douceur que tu donnes aux autres. Tu apprends, tu grandis, tu as le droit de ne pas tout maîtriser.",
- "Ne compare pas ton chapitre à celui de quelqu’un d’autre. Tu ne connais pas tout ce qu’il a traversé, et personne ne connaît entièrement ton chemin. Avance à ton rythme. Même les petits progrès comptent."
+ doute:{label:'Quand tu oublies ta valeur',title:'Ne sois pas si dure avec toi-même 🪞',messages:[
+ 'Ora, tu n’as pas besoin d’être parfaite pour être aimée. Ta valeur ne se mesure ni à ton apparence, ni à tes erreurs, ni aux choses que tu n’as pas encore accomplies. Tu es une personne entière, avec tes qualités, tes défauts, tes rêves et tes émotions. Ne réduis pas toute ta personne à ce qui te déplaît aujourd’hui. ❤️',
+ 'Si une amie que tu aimes te parlait comme tu te parles parfois, est-ce que tu la laisserais continuer ? Essaie de t’adresser à toi avec un peu de la douceur que tu donnes aux autres. Tu apprends, tu grandis, tu as le droit de ne pas tout maîtriser.',
+ 'Ne compare pas ton chapitre à celui de quelqu’un d’autre. Tu ne connais pas tout ce qu’il a traversé, et personne ne connaît entièrement ton chemin. Avance à ton rythme. Même les petits progrès comptent.'
  ]},
- reconfort:{label:"Juste un peu de douceur",title:"Viens, on souffle un peu ❤️",messages:[
- "Ma Ora, si tu lis ça parce que ta journée est compliquée, imagine que je te dis de t’asseoir un instant et de respirer. Tu n’as rien à prouver maintenant. Tu peux déposer un peu ce que tu portes, parler si tu en as envie ou rester tranquille. Tu comptes, même quand tu n’as pas les mots.",
- "Je ne peux pas promettre que tout sera toujours facile, mais je peux te rappeler que tu mérites de la tendresse, de l’écoute et du respect. Ne te contente pas de te donner aux autres jusqu’à t’oublier. Toi aussi, tu mérites qu’on prenne soin de toi.",
- "Ma meilleure amie, rappelle-toi que tu n’as pas besoin de gagner l’affection des gens en étant parfaite ou en faisant toujours plaisir. Les liens sincères laissent aussi de la place aux jours moins beaux. Je t’aime fort. ❤️"
+ reconfort:{label:'Juste un peu de douceur',title:'Viens, on souffle un peu ❤️',messages:[
+ 'Ma Ora, si tu lis ça parce que ta journée est compliquée, imagine que je te dis de t’asseoir un instant et de respirer. Tu n’as rien à prouver maintenant. Tu peux déposer un peu ce que tu portes, parler si tu en as envie ou rester tranquille. Tu comptes, même quand tu n’as pas les mots.',
+ 'Je ne peux pas promettre que tout sera toujours facile, mais je peux te rappeler que tu mérites de la tendresse, de l’écoute et du respect. Ne te contente pas de te donner aux autres jusqu’à t’oublier. Toi aussi, tu mérites qu’on prenne soin de toi.',
+ 'Ma meilleure amie, rappelle-toi que tu n’as pas besoin de gagner l’affection des gens en étant parfaite ou en faisant toujours plaisir. Les liens sincères laissent aussi de la place aux jours moins beaux. Je t’aime fort. ❤️'
  ]},
- colere:{label:"Quand tout t’énerve",title:"Tu peux ralentir avant de répondre 😤",messages:[
- "Ma Ora, tu as le droit d’être énervée. Essaie juste de ne pas prendre une décision importante au milieu de la tempête. Éloigne-toi quelques minutes si tu peux, respire, bois de l’eau et reviens à la situation quand la pression sera un peu redescendue. Tes émotions méritent d’être entendues, mais elles n’ont pas besoin de décider de tout à ta place.",
- "Tu n’as pas besoin de prétendre que rien ne t’a blessée. Quand tu seras plus calme, tu pourras dire ce qui t’a dérangée sans t’oublier ni blesser exprès l’autre personne. Poser une limite, ce n’est pas être méchante.",
- "Aujourd’hui, donne-toi le droit de faire une pause. Tu peux être fâchée et choisir quand même de te protéger, de garder ta dignité et de répondre plus tard."
+ colere:{label:'Quand tout t’énerve',title:'Tu peux ralentir avant de répondre 😤',messages:[
+ 'Ma Ora, tu as le droit d’être énervée. Essaie juste de ne pas prendre une décision importante au milieu de la tempête. Éloigne-toi quelques minutes si tu peux, respire, bois de l’eau et reviens à la situation quand la pression sera un peu redescendue. Tes émotions méritent d’être entendues, mais elles n’ont pas besoin de décider de tout à ta place.',
+ 'Tu n’as pas besoin de prétendre que rien ne t’a blessée. Quand tu seras plus calme, tu pourras dire ce qui t’a dérangée sans t’oublier ni blesser exprès l’autre personne. Poser une limite, ce n’est pas être méchante.',
+ 'Aujourd’hui, donne-toi le droit de faire une pause. Tu peux être fâchée et choisir quand même de te protéger, de garder ta dignité et de répondre plus tard.'
  ]},
- motivation:{label:"Quand tu as besoin de courage",title:"Un petit pas suffit pour aujourd’hui 🌱",messages:[
- "Ora, tu n’as pas besoin d’avoir confiance à 100 % pour commencer. Choisis une petite action que tu peux faire aujourd’hui, même si elle est imparfaite. Le courage, ce n’est pas ne jamais avoir peur ; c’est parfois avancer doucement avec la peur à côté.",
- "Regarde le chemin que tu as déjà parcouru au lieu de ne regarder que ce qu’il te reste à faire. Tu as déjà traversé des journées que tu pensais difficiles. Fais-toi confiance un peu plus, et autorise-toi aussi à demander du soutien.",
- "Ne transforme pas un retard en condamnation. Tu peux reprendre, apprendre, changer de méthode et recommencer. Tu n’as pas besoin de tout réussir aujourd’hui pour être fière de toi."
+ motivation:{label:'Quand tu as besoin de courage',title:'Un petit pas suffit pour aujourd’hui 🌱',messages:[
+ 'Ora, tu n’as pas besoin d’avoir confiance à 100 % pour commencer. Choisis une petite action que tu peux faire aujourd’hui, même si elle est imparfaite. Le courage, ce n’est pas ne jamais avoir peur ; c’est parfois avancer doucement avec la peur à côté.',
+ 'Regarde le chemin que tu as déjà parcouru au lieu de ne regarder que ce qu’il te reste à faire. Tu as déjà traversé des journées que tu pensais difficiles. Fais-toi confiance un peu plus, et autorise-toi aussi à demander du soutien.',
+ 'Ne transforme pas un retard en condamnation. Tu peux reprendre, apprendre, changer de méthode et recommencer. Tu n’as pas besoin de tout réussir aujourd’hui pour être fière de toi.'
  ]}
 };
 let currentMood=null,currentMoodIndex=0;
